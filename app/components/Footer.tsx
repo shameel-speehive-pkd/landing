@@ -17,7 +17,7 @@ const navLinks = [
 
 export default function Footer() {
   return (
-    <footer id="contact" className="w-full bg-slate-900 text-slate-300">
+    <footer id="contact" className="w-full bg-slate-900 text-slate-300" style={{ scrollSnapAlign: "start" }}>
       {/* CTA Band */}
       <div className="relative overflow-hidden">
         <div
@@ -49,7 +49,7 @@ export default function Footer() {
           </span>
           <h2
             className="text-3xl md:text-5xl font-bold text-white leading-tight mb-6"
-            style={{ fontFamily: "var(--font-outfit)" }}
+            style={{ fontFamily: "var(--font-jakarta)" }}
           >
             Ready to modernize
             <br />
@@ -88,7 +88,7 @@ export default function Footer() {
               <div className="flex items-center gap-3">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/logo.png" alt="Speehive Logo" className="w-10 h-10 object-contain" />
-                <span className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-outfit)" }}>
+                <span className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-jakarta)" }}>
                   Speehive
                 </span>
               </div>

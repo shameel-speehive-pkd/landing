@@ -5,8 +5,15 @@ import Image from "next/image";
 import ScrollSequence from "./components/ScrollSequence";
 import DashboardPreview from "./components/DashboardPreview";
 import Features from "./components/Features";
+import HowItWorks from "./components/HowItWorks";
 import Footer from "./components/Footer";
 import FloatingNodes from "./components/FloatingNodes";
+import Noise from "../components/Noise";
+import Magnet from "../components/Magnet";
+import FadeContent from "../components/FadeContent";
+import GlareHover from "../components/GlareHover";
+import BorderGlow from "../components/BorderGlow";
+import ScrollFloat from "../components/ScrollFloat";
 
 const NAV_LINKS = ["Platform", "Solutions", "Fleet Hub", "About"];
 
@@ -89,6 +96,8 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
+      {/* ── Global Effects ─────────────────────────────────────────────────────── */}
+      <Noise patternAlpha={12} patternRefreshInterval={3} />
       {/* ── Preloader ────────────────────────────────────────────────────────── */}
       <div
         className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white transition-opacity duration-700"
@@ -100,7 +109,7 @@ export default function Home() {
           <div className="flex flex-col items-center gap-3">
             <span
               className="text-2xl font-bold text-slate-900 tracking-tight"
-              style={{ fontFamily: "var(--font-outfit)" }}
+              style={{ fontFamily: "var(--font-jakarta)" }}
             >
               Speehive
             </span>
@@ -141,7 +150,7 @@ export default function Home() {
             <Image src="/logo.png" alt="Speehive" width={32} height={32} className="object-contain" />
             <span
               className="text-base font-bold text-slate-900 tracking-tight"
-              style={{ fontFamily: "var(--font-outfit)" }}
+              style={{ fontFamily: "var(--font-jakarta)" }}
             >
               Speehive
             </span>
@@ -170,13 +179,15 @@ export default function Home() {
             >
               Sign in
             </a>
-            <a
-              href="#contact"
-              id="nav-cta-btn"
-              className="text-sm font-semibold text-white px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 transition-all shadow-sm hover:shadow-md"
-            >
-              Get Demo
-            </a>
+            <Magnet magnetStrength={3} padding={60}>
+              <a
+                href="#contact"
+                id="nav-cta-btn"
+                className="text-sm font-semibold text-white px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 transition-all shadow-sm hover:shadow-md inline-block"
+              >
+                Get Demo
+              </a>
+            </Magnet>
           </div>
         </div>
       </nav>
@@ -186,7 +197,7 @@ export default function Home() {
       <div
         ref={sequenceContainerRef}
         className="relative"
-        style={{ height: "600vh" }}
+        style={{ height: "600vh", scrollSnapAlign: "start" }}
       >
         {/* Sticky canvas wrapper */}
         <div className="sticky top-0 w-full h-screen overflow-hidden">
@@ -237,7 +248,7 @@ export default function Home() {
               {/* Title with staggered words */}
               <h1
                 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-[1.05] tracking-tight"
-                style={{ fontFamily: "var(--font-outfit)", textShadow: "0 2px 40px rgba(0,0,0,0.5)" }}
+                style={{ fontFamily: "var(--font-jakarta)", textShadow: "0 2px 40px rgba(0,0,0,0.5)" }}
               >
                 <span
                   className="inline-block"
@@ -374,31 +385,55 @@ export default function Home() {
         }}
       >
         {/* ── Dashboard Showcase ─────────────────────────────────────────────── */}
-        <section id="platform" className="w-full py-24 md:py-32 px-6 bg-gradient-to-b from-white to-slate-50">
+        <section id="platform" className="w-full py-24 md:py-32 px-6 bg-gradient-to-b from-white to-slate-50" style={{ scrollSnapAlign: "start" }}>
           <div className="max-w-6xl mx-auto flex flex-col gap-16">
             {/* Header */}
-            <div className="text-center">
-              <span className="inline-block text-xs uppercase tracking-widest font-semibold text-blue-600 bg-blue-50 px-4 py-1.5 rounded-full border border-blue-100 mb-5">
-                Command Center
-              </span>
-              <h2
-                className="text-3xl md:text-5xl font-bold text-slate-900 leading-tight mb-4"
-                style={{ fontFamily: "var(--font-outfit)" }}
-              >
-                Your fleet, at a glance.
-                <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
-                  Always in control.
+            <FadeContent blur duration={1000} delay={100}>
+              <div className="text-center">
+                <span className="inline-block text-xs uppercase tracking-widest font-semibold text-blue-600 bg-blue-50 px-4 py-1.5 rounded-full border border-blue-100 mb-5">
+                  Command Center
                 </span>
-              </h2>
-              <p className="text-slate-500 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-                The Speehive Command Center gives your operations team a unified view
-                of every vessel, route, and metric — in real time, from any device.
-              </p>
-            </div>
+                <ScrollFloat
+                  containerClassName="text-center"
+                  textClassName="text-3xl md:text-5xl font-bold text-slate-900 leading-tight"
+                  animationDuration={1.2}
+                  ease="back.inOut(2)"
+                  scrollStart="top bottom+=20%"
+                  scrollEnd="top center"
+                  stagger={0.02}
+                >
+                  {"Your fleet, at a glance."}
+                </ScrollFloat>
+                <ScrollFloat
+                  containerClassName="text-center -mt-3"
+                  textClassName="text-3xl md:text-5xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500"
+                  animationDuration={1.2}
+                  ease="back.inOut(2)"
+                  scrollStart="top bottom+=10%"
+                  scrollEnd="top center-=10%"
+                  stagger={0.02}
+                >
+                  {"Always in control."}
+                </ScrollFloat>
+                <p className="text-slate-500 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+                  The Speehive Command Center gives your operations team a unified view
+                  of every vessel, route, and metric — in real time, from any device.
+                </p>
+              </div>
+            </FadeContent>
 
             {/* Interactive Dashboard */}
-            <DashboardPreview />
+            <FadeContent blur duration={1200} delay={300}>
+              <BorderGlow
+                backgroundColor="#f8fafc"
+                glowColor="210 90 60"
+                colors={["#3b82f6", "#06b6d4", "#10b981"]}
+                borderRadius={24}
+                glowIntensity={0.8}
+              >
+                <DashboardPreview />
+              </BorderGlow>
+            </FadeContent>
 
             {/* Testimonial / Social Proof */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -425,30 +460,40 @@ export default function Home() {
                   color: "from-cyan-500 to-blue-500",
                 },
               ].map(({ quote, author, role, avatar, color }) => (
-                <div
+                <GlareHover
                   key={author}
-                  className="bg-white rounded-2xl p-7 border border-slate-100 shadow-sm flex flex-col gap-5"
+                  width="100%"
+                  height="100%"
+                  background="transparent"
+                  borderRadius="16px"
+                  borderColor="transparent"
+                  glareColor="#ffffff"
+                  glareOpacity={0.15}
+                  glareSize={200}
+                  className="!p-0"
                 >
-                  <div className="flex gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <svg key={i} className="w-4 h-4 text-amber-400 fill-amber-400" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                      </svg>
-                    ))}
-                  </div>
-                  <p className="text-sm text-slate-600 leading-relaxed flex-1">"{quote}"</p>
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`w-9 h-9 rounded-full bg-gradient-to-br ${color} flex items-center justify-center text-white text-xs font-bold`}
-                    >
-                      {avatar}
+                  <div className="bg-white rounded-2xl p-7 border border-slate-100 shadow-sm flex flex-col gap-5 text-left h-full">
+                    <div className="flex gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-4 h-4 text-amber-400 fill-amber-400" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                      ))}
                     </div>
-                    <div>
-                      <div className="text-sm font-semibold text-slate-800">{author}</div>
-                      <div className="text-xs text-slate-400">{role}</div>
+                    <p className="text-sm text-slate-600 leading-relaxed flex-1">&ldquo;{quote}&rdquo;</p>
+                    <div className="flex items-center gap-3">
+                      <div
+                        className={`w-9 h-9 rounded-full bg-gradient-to-br ${color} flex items-center justify-center text-white text-xs font-bold`}
+                      >
+                        {avatar}
+                      </div>
+                      <div>
+                        <div className="text-sm font-semibold text-slate-800">{author}</div>
+                        <div className="text-xs text-slate-400">{role}</div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </GlareHover>
               ))}
             </div>
           </div>
@@ -458,73 +503,7 @@ export default function Home() {
         <Features />
 
         {/* ── How It Works ───────────────────────────────────────────────────── */}
-        <section id="solutions" className="w-full py-24 md:py-32 px-6" style={{ background: "linear-gradient(180deg, #f8fafc 0%, #ffffff 100%)" }}>
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-16">
-              <span className="inline-block text-xs uppercase tracking-widest font-semibold text-blue-600 bg-blue-50 px-4 py-1.5 rounded-full border border-blue-100 mb-5">
-                How It Works
-              </span>
-              <h2
-                className="text-3xl md:text-5xl font-bold text-slate-900 leading-tight"
-                style={{ fontFamily: "var(--font-outfit)" }}
-              >
-                Up and running
-                <br className="hidden md:block" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
-                  {" "}in 3 simple steps
-                </span>
-              </h2>
-            </div>
-
-            <div className="relative flex flex-col md:flex-row gap-8 md:gap-0">
-              {/* Connecting line on desktop */}
-              <div className="hidden md:block absolute top-10 left-[17%] right-[17%] h-px bg-gradient-to-r from-blue-200 via-cyan-200 to-emerald-200" />
-
-              {[
-                {
-                  step: "01",
-                  title: "Connect Your Fleet",
-                  description: "Install lightweight IoT gateways on your vessels. Our plug-and-play hardware syncs in minutes.",
-                  icon: "🔌",
-                  color: "from-blue-100 to-blue-50 border-blue-200",
-                  iconBg: "bg-blue-500",
-                },
-                {
-                  step: "02",
-                  title: "Activate Intelligence",
-                  description: "Speehive's AI begins processing telemetry immediately, surfacing insights and optimization opportunities.",
-                  icon: "🧠",
-                  color: "from-cyan-100 to-cyan-50 border-cyan-200",
-                  iconBg: "bg-cyan-500",
-                },
-                {
-                  step: "03",
-                  title: "Optimize & Scale",
-                  description: "Get personalized recommendations, automated reporting, and route adjustments that compound savings over time.",
-                  icon: "📈",
-                  color: "from-emerald-100 to-emerald-50 border-emerald-200",
-                  iconBg: "bg-emerald-500",
-                },
-              ].map(({ step, title, description, icon, iconBg }, idx) => (
-                <div key={step} className="flex-1 flex flex-col items-center text-center gap-4 px-6 relative">
-                  <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${iconBg === "bg-blue-500" ? "from-blue-100 to-blue-50 border border-blue-200" : iconBg === "bg-cyan-500" ? "from-cyan-100 to-cyan-50 border border-cyan-200" : "from-emerald-100 to-emerald-50 border border-emerald-200"} flex items-center justify-center text-3xl shadow-sm relative z-10`}>
-                    {icon}
-                    <span className={`absolute -top-2 -right-2 w-6 h-6 rounded-full ${iconBg} text-white text-xs font-bold flex items-center justify-center shadow`}>
-                      {idx + 1}
-                    </span>
-                  </div>
-                  <h3
-                    className="text-lg font-bold text-slate-900"
-                    style={{ fontFamily: "var(--font-outfit)" }}
-                  >
-                    {title}
-                  </h3>
-                  <p className="text-sm text-slate-500 leading-relaxed max-w-xs">{description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <HowItWorks />
 
         {/* ── Footer / CTA ───────────────────────────────────────────────────── */}
         <Footer />

@@ -234,7 +234,7 @@ export default function ScrollSequence({
             {/* Title — each line staggered */}
             <h2
               className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-[1.1] whitespace-pre-line"
-              style={{ fontFamily: "var(--font-outfit)", textShadow: "0 2px 30px rgba(0,0,0,0.6)" }}
+              style={{ fontFamily: "var(--font-jakarta)", textShadow: "0 2px 30px rgba(0,0,0,0.6)" }}
             >
               {step.title.split("\n").map((line, i) => (
                 <span
